@@ -54,7 +54,7 @@
             </div>
             <canvas id="canvas" width="1100" height="680"></canvas>
         </div>
-
+        <audio loop autoplay id="audio" controls="controls" src="./file/很爱很爱你.mp3"></audio>
     </div>
 
     <script>
@@ -63,7 +63,8 @@
     <script>
         (function() {
             var canvas = $('#canvas');
-
+            var audio = document.getElementById('audio')
+            // console.log(audio)
             if (!canvas[0].getContext) {
                 $("#error").show();
                 return false;
@@ -115,6 +116,7 @@
             var hold = 1;
 
             canvas.click(function(e) {
+                audio.play()
                 var offset = canvas.offset(),
                     x, y;
                 x = e.pageX - offset.left;
@@ -193,11 +195,11 @@
                 var together = new Date();
                 together.setFullYear(2016, 12, 20);
                 // together.setFullYear(2015,10 ,8); 			//时间年月日
-                together.setHours(16); //小时	
-                together.setMinutes(53); //分钟
+                together.setHours(12); //小时	
+                together.setMinutes(0); //分钟
                 together.setSeconds(0); //秒前一位
                 together.setMilliseconds(2); //秒第二位
-
+                console.log(together);
                 $("#code").show().typewriter();
                 // alert(1)
                 $("#clock-box").fadeIn(500);
