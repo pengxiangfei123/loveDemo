@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>给小春的一封信</title>
+    <link rel="stylesheet" href="./css/swiper-4.3.3.min.css">
     <link type="text/css" rel="stylesheet" href="./file/default.css">
     <script type="text/javascript" src="./file/jquery.min.js"></script>
     <script type="text/javascript" src="./file/jscex.min.js"></script>
@@ -21,7 +22,9 @@
 
 <body>
     <div id="main">
-        <div id="error">本页面采用HTML5编辑，目前您的浏览器无法显示，请换成谷歌(<a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a>)或者火狐(<a href="http://firefox.com.cn/download/">Firefox</a>)浏览器，或者其他游览器的最新版本。</div>
+        <div id="error">本页面采用HTML5编辑，目前您的浏览器无法显示，请换成谷歌(<a
+                href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a>)或者火狐(<a
+                href="http://firefox.com.cn/download/">Firefox</a>)浏览器，或者其他游览器的最新版本。</div>
         <div id="wrap">
             <div id="text">
                 <div id="code">
@@ -54,22 +57,39 @@
             </div>
             <canvas id="canvas" width="1100" height="680"></canvas>
         </div>
-        <audio loop autoplay id="audio" controls="controls" src="./file/很爱很爱你.mp3"></audio>
+        <audio loop autoplay="autoplay" id="audios" controls src="./file/你是我心爱的姑娘.mp3"></audio>
+        <div class="lunbo">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img height="100%" src="./images/love.jpg" alt=""></div>
+                    <div class="swiper-slide"><img height="100%" src="./images/love2.jpg" alt=""></div>
+                    <div class="swiper-slide"><img height="100%" src="./images/love3.jpg" alt=""></div>
+                    <div class="swiper-slide"><img height="100%" src="./images/love4.jpg" alt=""></div>
+                    <div class="swiper-slide"><img height="100%" src="./images/love5.jpg" alt=""></div>
+                    <div class="swiper-slide"><img height="100%" src="./images/love6.png" alt=""></div>
+                    <div class="swiper-slide"><img height="100%" src="./images/love7.jpg" alt=""></div>
+                    <div class="swiper-slide"><img height="100%" src="./images/love8.jpg" alt=""></div>
+                    <div class="swiper-slide"><img height="100%" src="./images/love9.jpg" alt=""></div>
+                    <div class="swiper-slide"><img height="100%" src="./images/love10.jpg" alt=""></div>
+                    <div class="swiper-slide"><img height="100%" src="./images/love11.jpg" alt=""></div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
     </div>
 
     <script>
     </script>
 
     <script>
-        (function() {
+        (function () {
             var canvas = $('#canvas');
-            var audio = document.getElementById('audio')
             // console.log(audio)
             if (!canvas[0].getContext) {
                 $("#error").show();
                 return false;
             }
-
             var width = canvas.width();
             var height = canvas.height();
             canvas.attr("width", width);
@@ -115,8 +135,10 @@
             var foot = tree.footer;
             var hold = 1;
 
-            canvas.click(function(e) {
-                audio.play()
+            canvas.click(function (e) {
+                var audios = document.getElementById('audios')
+                audios.play()
+                $('.lunbo').animate({ opacity: 1 }, 2000)
                 var offset = canvas.offset(),
                     x, y;
                 x = e.pageX - offset.left;
@@ -127,7 +149,7 @@
                     canvas.unbind("mousemove");
                     canvas.removeClass('hand');
                 }
-            }).mousemove(function(e) {
+            }).mousemove(function (e) {
                 var offset = canvas.offset(),
                     x, y;
                 x = e.pageX - offset.left;
@@ -135,7 +157,7 @@
                 canvas.toggleClass('hand', seed.hover(x, y));
             });
 
-            var seedAnimate = eval(Jscex.compile("async", function() {
+            var seedAnimate = eval(Jscex.compile("async", function () {
                 seed.draw();
                 while (hold) {
                     $await(Jscex.Async.sleep(10));
@@ -151,21 +173,21 @@
                 }
             }));
 
-            var growAnimate = eval(Jscex.compile("async", function() {
+            var growAnimate = eval(Jscex.compile("async", function () {
                 do {
                     tree.grow();
                     $await(Jscex.Async.sleep(10));
                 } while (tree.canGrow());
             }));
 
-            var flowAnimate = eval(Jscex.compile("async", function() {
+            var flowAnimate = eval(Jscex.compile("async", function () {
                 do {
                     tree.flower(2);
                     $await(Jscex.Async.sleep(10));
                 } while (tree.canFlower());
             }));
 
-            var moveAnimate = eval(Jscex.compile("async", function() {
+            var moveAnimate = eval(Jscex.compile("async", function () {
                 tree.snapshot("p1", 240, 0, 610, 680);
                 while (tree.move("p1", 500, 0)) {
                     foot.draw();
@@ -181,7 +203,7 @@
                 canvas.css("background", "none");
             }));
 
-            var jumpAnimate = eval(Jscex.compile("async", function() {
+            var jumpAnimate = eval(Jscex.compile("async", function () {
                 var ctx = tree.ctx;
                 while (true) {
                     tree.ctx.clearRect(0, 0, width, height);
@@ -191,7 +213,7 @@
                 }
             }));
 
-            var textAnimate = eval(Jscex.compile("async", function() {
+            var textAnimate = eval(Jscex.compile("async", function () {
                 var together = new Date();
                 together.setFullYear(2016, 12, 20);
                 // together.setFullYear(2015,10 ,8); 			//时间年月日
@@ -210,7 +232,7 @@
                 // alert(1)
             }));
 
-            var runAsync = eval(Jscex.compile("async", function() {
+            var runAsync = eval(Jscex.compile("async", function () {
                 $await(seedAnimate());
                 $await(growAnimate());
                 $await(flowAnimate());
@@ -225,5 +247,19 @@
         })();
     </script>
 </body>
+<script src="./file/swiper.min.js"></script>
+<script src="./file/jquery-3.2.1.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 9,
+        spaceBetween: 30,
+        centeredSlides: true,
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
+</script>
 
 </html>
