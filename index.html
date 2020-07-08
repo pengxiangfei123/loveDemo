@@ -15,9 +15,8 @@
     <script type="text/javascript" src="./file/jscex-async-powerpack.min.js"></script>
     <script type="text/javascript" src="./file/functions.js" charset="utf-8"></script>
     <script type="text/javascript" src="./file/love.js" charset="utf-8"></script>
-    <style type="text/css">
-
-    </style>
+    <script src="./file/swiper.min.js"></script>
+    <script src="./file/jquery-3.2.1.min.js"></script>
 </head>
 
 <body>
@@ -245,22 +244,23 @@
             }));
 
             runAsync().start();
+            var swiper = new Swiper('.swiper-container', {
+                slidesPerView: 6,
+                spaceBetween: 30,
+                centeredSlides: true,
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+            });
         })();
     </script>
 </body>
-<script src="./file/swiper.min.js"></script>
-<script src="./file/jquery-3.2.1.min.js"></script>
-<script>
-    var swiper = new Swiper('.swiper-container', {
-        slidesPerView: 6,
-        spaceBetween: 30,
-        centeredSlides: true,
-        loop: true,
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-    });
-</script>
+<!-- <script src="./file/swiper.min.js"></script>
+<script src="./file/jquery-3.2.1.min.js"></script> -->
+<!-- <script>
+
+</script> -->
 
 </html>
